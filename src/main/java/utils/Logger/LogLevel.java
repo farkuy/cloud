@@ -15,6 +15,6 @@ public enum LogLevel {
 
     @Override
     public String toString() {
-        return color + "[" + label + "]" + Colors.RESET + " ";
+        return color + "[" + label + "]" + Colors.RESET;
     }
 }

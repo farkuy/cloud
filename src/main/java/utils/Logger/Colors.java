@@ -7,6 +7,7 @@ public enum Colors {
     YELLOW("\u001B[33m"),
     BLUE("\u001B[34m"),
     PURPLE("\u001B[35m"),
+    GRAY("\u001B[90m"),
     CYAN("\u001B[36m");
 
     private final String code;
