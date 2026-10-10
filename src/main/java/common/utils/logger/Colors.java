@@ -1,4 +1,4 @@
-package utils.Logger;
+package common.utils.logger;
 
 public enum Colors {
     RESET("\u001B[0m"),

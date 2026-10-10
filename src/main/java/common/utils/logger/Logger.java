@@ -1,6 +1,6 @@
-package utils.Logger;
+package common.utils.logger;
 
-import static utils.Logger.Colors.*;
+import static common.utils.logger.Colors.*;
 
 public final class Logger {
 

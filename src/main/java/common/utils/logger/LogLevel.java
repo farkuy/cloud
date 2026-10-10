@@ -1,4 +1,4 @@
-package utils.Logger;
+package common.utils.logger;
 
 public enum LogLevel {
     INFO("INFO", Colors.BLUE),
