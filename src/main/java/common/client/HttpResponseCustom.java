@@ -1,7 +1,6 @@
 package common.client;
 
 import com.sun.net.httpserver.HttpExchange;
-import com.sun.net.httpserver.HttpHandler;
 import common.utils.logger.Logger;
 
 import java.io.IOException;

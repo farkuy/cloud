@@ -4,6 +4,7 @@ import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 import common.client.CrudOperation;
 import common.client.HttpResponseCustom;
+import common.utils.logger.Logger;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -32,5 +33,7 @@ public final class UserController implements HttpHandler {
                 }
             """
         );
+
+        Logger.info("Информация отпавленна");
     }
 }

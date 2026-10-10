@@ -9,22 +9,11 @@ import java.net.InetSocketAddress;
 
 public final class Server {
     public static HttpServer startServer(int port) {
-        HttpServer server;
+        HttpServer server = createServer(port);
         String portStr = String.valueOf(port);
 
         try {
-            server = HttpServer.create(
-                    new InetSocketAddress(port),
-                    0
-            );
-        } catch (IOException e) {
-            Logger.error("Server not create at port =", portStr, e.getMessage());
-            throw new RuntimeException(e);
-        }
-
-        try {
-            createContext(server);
-
+            createAllContext(server);
             server.setExecutor(null);
             server.start();
 
@@ -37,7 +26,22 @@ public final class Server {
         return server;
     }
 
-    private static void createContext(HttpServer server) {
+    private static HttpServer createServer(int port) {
+        HttpServer server;
+        try {
+            server = HttpServer.create(
+                    new InetSocketAddress(port),
+                    0
+            );
+        } catch (IOException e) {
+            Logger.error("Server not create at port =", String.valueOf(port), e.getMessage());
+            throw new RuntimeException(e);
+        }
+
+        return server;
+    }
+
+    private static void createAllContext(HttpServer server) {
         server.createContext("/user", new UserController());
     }
 }
