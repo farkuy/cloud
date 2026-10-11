@@ -1,3 +1,5 @@
+package common.configs;
+
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
@@ -36,7 +38,7 @@ public class Config {
         return new Config(port);
     }
 
-    int getPort() {
+    public int getPort() {
         return port;
     }
 }
