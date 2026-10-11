@@ -2,7 +2,7 @@ package common.client;
 
 import com.sun.net.httpserver.HttpServer;
 import common.utils.logger.Logger;
-import user.controller.UserController;
+import file.controller.FileController;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
@@ -42,6 +42,6 @@ public final class Server {
     }
 
     private static void createAllContext(HttpServer server) {
-        server.createContext("/user", new UserController());
+        server.createContext("/file", new FileController());
     }
 }

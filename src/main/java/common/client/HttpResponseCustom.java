@@ -1,6 +1,7 @@
 package common.client;
 
 import com.sun.net.httpserver.HttpExchange;
+import common.client.exceptions.BaseException;
 import common.utils.logger.Logger;
 
 import java.io.IOException;
@@ -22,7 +23,11 @@ public final class HttpResponseCustom {
         try {
             CrudHandler action = methodsAndParams.get(operation);
             action.execute();
-        } catch (Exception e) {
+        } catch (BaseException e) {
+            Logger.error(e.getMessage(), "-", e.getDescription());
+            sendResponse(exchange, e.getStatusCode(), e.getMessage());
+        }
+        catch (Exception e) {
             Logger.error("Ошибка сервера:", e.getMessage());
             sendResponse(exchange, 500, "Ошибка сервера: " + e.getMessage());
         }
