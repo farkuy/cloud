@@ -4,6 +4,7 @@ import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 import common.client.CrudOperation;
 import common.client.HttpResponseCustom;
+import common.client.exceptions.BadRequestException;
 import common.utils.logger.Logger;
 import file.service.FileServiceIml;
 
@@ -19,13 +20,13 @@ public final class FileController implements HttpHandler {
 
     @Override
     public void handle(HttpExchange exchange) throws IOException {
-        methodsAndParams.put(CrudOperation.POST, () -> postUser(exchange));
+        methodsAndParams.put(CrudOperation.POST, () -> save(exchange));
 
         HttpResponseCustom.handle(exchange, methodsAndParams);
     }
 
-    private static void postUser(HttpExchange exchange) throws IOException {
-        FileServiceIml.writeFile(exchange);
+    private static void save(HttpExchange exchange) throws IOException {
+        FileServiceIml.save(exchange);
         sendResponse(exchange, 200, "Файл сохранен");
 
         Logger.info("Файл сохранен");

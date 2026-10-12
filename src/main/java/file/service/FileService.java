@@ -1,5 +1,5 @@
 package file.service;
 
 public interface FileService {
-    public static void writeFile() {};
+    public static void save() {};
 }

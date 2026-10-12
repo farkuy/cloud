@@ -1,6 +1,7 @@
 package common.client;
 
 import com.sun.net.httpserver.HttpServer;
+import common.client.constants.ApiPaths;
 import common.utils.logger.Logger;
 import file.controller.FileController;
 
@@ -42,6 +43,6 @@ public final class Server {
     }
 
     private static void createAllContext(HttpServer server) {
-        server.createContext("/file", new FileController());
+        server.createContext(ApiPaths.FILE, new FileController());
     }
 }
