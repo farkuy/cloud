@@ -20,6 +20,9 @@ public class FileServiceIml implements FileService {
             throw new BadRequestException(errorMessage, e.getMessage());
         }
 
+        if (binaryData.length == 0) throw new BadRequestException();
+
+
         var filePath = "C:\\Users\\Onton\\Desktop\\Gerwant.jpg";
         File file = new File(filePath);
         try (FileOutputStream fos = new FileOutputStream(file)) {
