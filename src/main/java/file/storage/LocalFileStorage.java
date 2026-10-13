@@ -9,18 +9,24 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
 
-public final class LocalFileStorage implements FileStorage{
+public class LocalFileStorage implements FileStorage {
 
-    public static void save(String fileName, InputStream data, long size) throws IOException {
+    public void save(String fileName, Path path, InputStream data, long size) throws IOException {
         if (fileName == null || fileName.isBlank()) {
             throw new BadRequestException("Не указано имя файла");
         }
 
-        Path baseDirectory = Path.of("C:", "Users", "Onton", "Desktop", "uploads");
-        Path target = baseDirectory.resolve(fileName).normalize();
+        Path baseDirectory = Path.of("C:", "Users", "Onton", "Desktop");
+        String pathStr = path.toString();
+        if (pathStr.startsWith("/") || pathStr.startsWith("\\")) {
+            pathStr = pathStr.substring(1);
+        }
+        Path fullPath = baseDirectory.resolve(pathStr);
+
+        Path target = fullPath.resolve(fileName).normalize();
         long usableSpace = Files.getFileStore(target.getParent()).getUsableSpace();
 
-        if (!target.startsWith(baseDirectory)) {
+        if (!target.startsWith(fullPath)) {
             throw new BadRequestException("Некорректное имя файла");
         }
         if (usableSpace < size) {
@@ -28,7 +34,7 @@ public final class LocalFileStorage implements FileStorage{
         }
 
         try {
-            Files.createDirectories(baseDirectory);
+            Files.createDirectories(fullPath);
             Files.copy(data, target, StandardCopyOption.REPLACE_EXISTING);
         } catch (IOException e) {
             throw new BadRequestException("Ошибка при сохранении файла", e.getMessage());
